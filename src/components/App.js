@@ -1,10 +1,12 @@
+import Categories from "./Cardapio/Categories/Index"
+import Itens from "./Cardapio/Itens/Index"
+
 function App() {
   return (
-    <div>
-      <header>
-        <h1>Olá</h1>
-      </header>
-    </div>
+    <>
+      <Categories/>
+      <Itens/>
+    </>
   );
 }
 
