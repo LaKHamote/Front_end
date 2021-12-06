@@ -9,4 +9,9 @@ export const Container = styled.div`
     flex-wrap: wrap;
     padding: 1rem;
 
+    @media only screen and (max-width : 915px) {
+        margin-left: 100px;
+        justify-content:center;
+    }
+
 `;
