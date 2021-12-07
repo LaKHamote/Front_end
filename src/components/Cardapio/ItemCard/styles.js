@@ -4,7 +4,7 @@ export const Containerzin = styled.div`
 
     min-width: 180px;
     height: 235px;
-    margin: 3rem 3rem 2rem 3rem;
+    margin: 3rem 4.5rem 2rem 3rem;
     
     img {
         width: 180px;

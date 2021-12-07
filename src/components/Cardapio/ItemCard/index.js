@@ -1,14 +1,15 @@
 import { Containerzin } from "./styles.js"
+import ItemDefault from "../../../assets/item_default.png"
 
-const ItemCard = (props) => {
+const ItemCard = ({name, price, photo}) => {
 
     return (
         <Containerzin>
             <a href="">
-                <img src={"http://localhost:3000/"+props.photo} alt="imagem do produto"/>
+                <img src={photo? "http://localhost:3000/"+photo : ItemDefault}/>
             </a>
-            <p>{props.name}</p>
-            <p>R$ {props.price.toFixed(2)}</p>
+            <p>{name}</p>
+            <p>R$ {price.toFixed(2)}</p>
         </Containerzin>
     )
 }
