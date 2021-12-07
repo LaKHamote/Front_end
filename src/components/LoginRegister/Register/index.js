@@ -1,5 +1,6 @@
 import { Container } from "../loginRegisterStyle";
 import UserDefault from "../../../assets/user_default.png"
+import { Link } from "react-router-dom";
 
 const Register = () => {
 
@@ -12,7 +13,7 @@ const Register = () => {
             <input placeholder="Confirmar Senha" type="password"/>
             <button>Criar</button>
             <p>Já tem uma conta?</p>
-            <a href="/login">Faça login</a>
+            <Link to="/login">Faça login</Link>
         </Container>
     );
 };

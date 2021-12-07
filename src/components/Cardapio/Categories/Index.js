@@ -1,4 +1,4 @@
-import { BarraLateral } from "./Styles"
+import { BarraLateral } from "./styles.js"
 
 const Categories = () => {
 

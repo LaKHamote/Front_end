@@ -1,5 +1,5 @@
-import ItemCard from "../ItemCard/Index"
-import { Container } from "./Styles"
+import ItemCard from "../ItemCard"
+import { Container } from "./styles.js"
 
 const Itens = () => {
 
