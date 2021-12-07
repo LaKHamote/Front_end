@@ -1,4 +1,4 @@
-import { Containerzin } from "./Styles"
+import { Containerzin } from "./styles.js"
 
 const ItemCard = (props) => {
 
