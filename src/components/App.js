@@ -1,11 +1,14 @@
 import Routes from "../routes";
 import { BrowserRouter } from 'react-router-dom'
+import { UserProvider } from "../context/useUserContent";
 
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes/>
+      <UserProvider>
+        <Routes/>
+      </UserProvider>
     </BrowserRouter>
   );
 }
