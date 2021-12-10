@@ -10,6 +10,11 @@ export const Containerzin = styled.div`
         width: 180px;
         height: 160px;
         border-radius: 1rem;
+        :hover{
+            transform: scale(1.1);
+            display:flex;
+            transition-duration: 500ms;
+        }
     }
 
 
@@ -18,11 +23,5 @@ export const Containerzin = styled.div`
         max-width: 180px;
     }
 
-    :hover {
-        img {
-            transform: scale(1.1);
-            display:flex;
-        }
-    }
 
 `;
