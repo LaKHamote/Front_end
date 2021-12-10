@@ -1,6 +1,7 @@
 import { Container, FavouriteContainer, H2, Filter, Title } from "./styles";
 import UserDefault from "../../assets/user_default.png"
 import Favorite from "./Favorite";
+import { useUserContext } from "../../context/useUserContent";
 
 const UserProfile = () => {
     const product = {
@@ -8,6 +9,9 @@ const UserProfile = () => {
         name: "item",
         price: "Preço"
     }
+
+    const {user} = useUserContext()
+    console.log(user)
     return (
         <>
             <Title>Bem Vindo</Title>
@@ -17,8 +21,8 @@ const UserProfile = () => {
                     <button>Trocar Foto</button>
                 </div>
                 <div className="info">
-                    <p id="email">Email: email@test.com</p>
-                    <p>Nome: nome</p>
+                    <p id="email">Email: {user && user.email}</p>
+                    <p>Nome: {user && user.name}</p>
                 </div>
             </Container>
             <H2>Meus Favoritos</H2>
