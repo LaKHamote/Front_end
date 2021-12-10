@@ -1,17 +1,29 @@
+import { useEffect, useState } from "react"
+import { api_v1 }from "../../services/api.js"
 import { Container, FavouriteContainer, H2, Filter, Title } from "./styles";
 import UserDefault from "../../assets/user_default.png"
 import Favorite from "./Favorite";
 import { useUserContext } from "../../context/useUserContent";
 
+
 const UserProfile = () => {
-    const product = {
-        photo: UserDefault,
-        name: "item",
-        price: "Preço"
+    
+    const {user} = useUserContext()
+    const [Favourites, setFavourites] = useState([])
+    const fetchFavourites = async () => {
+        const response = await api_v1.get("favourites",{
+            headers:{
+                "X-User-Token": user.authentication_token,
+                "X-User-Email": user.email
+            }
+        })
+        setFavourites(response.data)
     }
 
-    const {user} = useUserContext()
-    console.log(user)
+    useEffect(() => {
+        fetchFavourites()
+    }, [])
+
     return (
         <>
             <Title>Bem Vindo</Title>
@@ -36,14 +48,9 @@ const UserProfile = () => {
                 </select>
             </Filter>
             <FavouriteContainer>
-                <Favorite product={product}/>
-                <Favorite product={product}/>
-                <Favorite product={product}/>
-                <Favorite product={product}/>
-                <Favorite product={product}/>
-                <Favorite product={product}/>
-                <Favorite product={product}/>
-                <Favorite product={product}/>
+                {Favourites.map((item, index) => (
+                    <Favorite key={index} id={item.product.id} name={item.product.name} price={item.product.price} photo={item.product.photo_url}/>
+                ))}
             </FavouriteContainer>
         </>
     );

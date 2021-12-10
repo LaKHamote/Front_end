@@ -18,6 +18,9 @@ const Login = () => {
             <button onClick={() => login(user)}>Login</button>
             <p>Ainda não tem uma conta?</p>
             <Link to="/register">Registre-se agora</Link>
+            <Link to="/cardapio/todos">Cardapio</Link>
+            <Link to="/user/profile">Profile</Link>
+
         </Container>
     );
 }

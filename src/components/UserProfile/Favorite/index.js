@@ -1,12 +1,13 @@
 import { Container } from "./styles";
+import UserDefault from "../../../assets/user_default.png"
 
-const Favorite = ({product}) => {
+const Favorite = ({name, price, photo}) => {
 
     return (
         <Container>
-            <img src={product.photo} alt="imagem do produto"/>
-            <p>{product.name}</p>
-            <p>{product.price}</p>
+            <img src={photo? "http://localhost:3000"+photo : UserDefault} alt="imagem do produto"/>
+            <p>{name}</p>
+            <p>{price}</p>
         </Container>
     );
 }
