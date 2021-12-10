@@ -9,6 +9,7 @@ export const Containerzin = styled.div`
     img {
         width: 180px;
         height: 160px;
+        border-radius: 1rem;
     }
 
 

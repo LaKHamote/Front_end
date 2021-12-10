@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import { BarraLateral } from "./styles.js"
 
 const Categories = () => {
@@ -5,12 +6,12 @@ const Categories = () => {
     return (
         <BarraLateral>
             <div>
-                <a href="">Todos</a>
-                <a href="">Entradas</a>
-                <a href="">Pizzas</a>
-                <a href="">Lasanhas</a>
-                <a href="">Macarrões</a>
-                <a href="">Bebidas</a>
+                <Link to="../cardapio/todos">Todos</Link>
+                <Link to="../cardapio/entrada">Entradas</Link>
+                <Link to="../cardapio/pizza">Pizzas</Link>
+                <Link to="../cardapio/lasanha">Lasanhas</Link>
+                <Link to="../cardapio/macarrao">Macarrões</Link>
+                <Link to="../cardapio/bebida">Bebidas</Link>
             </div>
         </BarraLateral>
     )
