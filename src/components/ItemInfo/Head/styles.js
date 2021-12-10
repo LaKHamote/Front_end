@@ -62,11 +62,12 @@ export const Container = styled.div`
             
         align-self: flex-end;
         .crz {
-            height: 0.8rem;
+            height: 1.2rem;
             width: auto;
+            margin-top: 5px;
 
-            @media only screen and (min-width : 600px) {
-                height: 1.4rem;
+            @media only screen and (min-width : 850px) {
+                height: 2rem;
             }
         }
         cursor: pointer;

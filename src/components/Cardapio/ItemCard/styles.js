@@ -20,12 +20,8 @@ export const Containerzin = styled.div`
 
     :hover {
         img {
-            width: 225px;
-            height: 200px;
+            transform: scale(1.1);
             display:flex;
-        }
-        p {
-            max-width:225px;
         }
     }
 

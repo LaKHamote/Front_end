@@ -25,6 +25,7 @@ export const BarraLateral = styled.div`
 
     a:hover {
         text-decoration: underline 2px;
+        transform: scale(1.1);
     }
 
 `;
