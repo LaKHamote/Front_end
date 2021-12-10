@@ -29,7 +29,7 @@ const UserProfile = () => {
             <Title>Bem Vindo</Title>
             <Container>
                 <div className="photo">
-                    <img src={UserDefault} alt="Imagem do usuário"/>
+                    <img src={user.profile_picture_url?  "http://localhost:3000"+user.profile_picture_url : UserDefault} alt="Imagem do usuário"/>
                     <button>Trocar Foto</button>
                 </div>
                 <div className="info">
