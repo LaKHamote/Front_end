@@ -9,18 +9,19 @@ const Itens = () => {
   let { categorie } = useParams()
   
   const [products, setProducts] = useState([])
-  const [newproducts, setnewproducts] = useState([])
 
   useEffect (() => {
     api_v1.get('products').then((response) => {
       setProducts(response.data)
-      setnewproducts(response.data)
   })}, [])
 
   
-  useEffect(() => {
-    (categorie === "todos")? setnewproducts(products) : setnewproducts(products.filter((products) => (products.type_name === categorie)))
-  }, [categorie])
+  let newproducts = []
+  if (categorie === "todos"){
+    newproducts = products
+  }else {
+    newproducts = products.filter((products) => (products.type_name === categorie))
+  }
 
     return (
         <Container>
