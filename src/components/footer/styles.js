@@ -14,7 +14,7 @@ export const Container = styled.footer `
 
 
 footer {
-    position:absolute;
+    position:fixed;
     bottom:0;
     width:100%;
     background-color: #FF5C01;

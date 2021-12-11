@@ -24,8 +24,8 @@ const ItemInfo = () => {
     const fetchIsFavourite = async () => {
         const response = await api_v1.get(`favourites/${id}`, {
             headers:{
-                "X-User-Token": user.authentication_token,
-                "X-User-Email": user.email
+                "X-User-Token": "JnUAkpoU2ymS1yZ4i3d3",
+                "X-User-Email": "lucas@gmail.com"
             }
         })
         setIsFavourite(response.data)
