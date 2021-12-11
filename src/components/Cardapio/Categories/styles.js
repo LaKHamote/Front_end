@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const BarraLateral = styled.div`
     height: 100%;
@@ -30,5 +30,13 @@ export const BarraLateral = styled.div`
         transform: scale(1.1);
         transition-duration: 500ms;
     }
+
+
+    ${props => !props.isAdmin && css`
+        
+        .edicao {
+            display: none;
+        }
+    `}
 
 `;
