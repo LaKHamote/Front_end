@@ -75,5 +75,6 @@ export const FavouriteContainer = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-initial;
+    padding: 1rem 1rem 6rem 1rem;
 `;

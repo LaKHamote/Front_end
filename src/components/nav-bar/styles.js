@@ -39,4 +39,9 @@ export const Container = styled.nav `
     margin-right: 0rem;
 }
 
+img {
+    width: 2rem;
+    max-height: 1.75rem;
+}
+
 `;
