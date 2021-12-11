@@ -10,7 +10,7 @@ import { useUserContext } from "../../../context/useUserContent.js"
 const Head = ({id, name, price, photo, isFavourite, setIsFavourite}) => {
 
     const { user } = useUserContext()
-    
+
     const Favoritar = async () => {
         api_v1.defaults.headers.common[`X-User-Token`] = "JnUAkpoU2ymS1yZ4i3d3"
         api_v1.defaults.headers.common[`X-User-Email`] = "lucas@gmail.com"
@@ -19,6 +19,7 @@ const Head = ({id, name, price, photo, isFavourite, setIsFavourite}) => {
                 product_id: id,
                 user_id: 1
             }
+            
         })
     }
 

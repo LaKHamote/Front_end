@@ -10,11 +10,11 @@ import { useUserContext } from "../../context/useUserContent"
 
 const ItemInfo = () => {
 
-    let { id } = useParams()
+    const {user} = useUserContext()
+
+    const { id } = useParams()
     const [product, setProduct] = useState({})
     const [IsFavourite, setIsFavourite] = useState(false)
-    const {user} = useUserContext()
-    console.log(user)
 
     const fetchProducts = async () => {
         const response = await api_v1.get(`products/show/${id}`)
@@ -22,24 +22,21 @@ const ItemInfo = () => {
     }
 
     const fetchIsFavourite = async () => {
-        const response = await api_v1.get(`favourites/${id}`, {
-            headers:{
-                "X-User-Token": "JnUAkpoU2ymS1yZ4i3d3",
-                "X-User-Email": "lucas@gmail.com"
-            }
-        })
+        const response = await api_v1.get(`favourites/${id}`)
         setIsFavourite(response.data)
     }
     
     useEffect(() => {
         fetchProducts()
-        fetchIsFavourite()
-    }, [])
+        if (user.authentication_token) {
+            fetchIsFavourite()
+        }
+    },[user])
 
 
     return (
         <>
-            <Head  key={product.id}
+            <Head  key={`h${product.id}`}
                     id={product.id}
                     name={product.name} 
                     price={product.price}
@@ -47,7 +44,7 @@ const ItemInfo = () => {
                     isFavourite={IsFavourite}
                     setIsFavourite={setIsFavourite}
                     />
-            <Description key={product.id}
+            <Description key={`d${product.id}`}
                             description={product.description}
                             quantity={product.quantity}
             />
