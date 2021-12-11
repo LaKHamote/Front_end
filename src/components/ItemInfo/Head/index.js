@@ -10,19 +10,15 @@ import { useUserContext } from "../../../context/useUserContent.js"
 const Head = ({id, name, price, photo, isFavourite, setIsFavourite}) => {
 
     const { user } = useUserContext()
-    
+
     const Favoritar = async () => {
         const response = await api_v1.post(`favourites/create`, {
-            headers:{
-                "X-User-Token": user.authentication_token,
-                "X-User-Email": user.email
-            },
-            params: {
+            favourite: {
                 product_id: id,
                 user_id: user.id
             }
+            
         })
-        
     }
     
     const Favouritou = () => {
@@ -33,11 +29,11 @@ const Head = ({id, name, price, photo, isFavourite, setIsFavourite}) => {
   return (
         <Container isFavourite={isFavourite}>
             <h1>{name}</h1>
-            <img className="item" src={photo? "http://localhost:3000/"+photo : ItemDefault} alt="foto do produto"/>
+            <img className="item" src={photo? "http://localhost:3000/"+photo : ItemDefault} alt={`foto do produto ${name}`}/>
             <div>
-                <img  className="crz E" src={CoracaoEmpty}/>
-                <img onClick={() => (Favouritou())} className="crz R" src={CoracaoRed}/>
-                <img  className="crz B" src={CoracaoBroken}/>
+                <img  className="crz E" src={CoracaoEmpty} alt="coração vazio"/>
+                <img onClick={() => (Favouritou())} className="crz R" src={CoracaoRed} alt="favoritar"/>
+                <img  className="crz B" src={CoracaoBroken} alt="desfavoritar"/>
             </div>
             <p>R$ {price}</p>
 

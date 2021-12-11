@@ -9,7 +9,6 @@ const Login = () => {
     const [user, setUser] = useState({})
 
     const {login} = useUserContext()
-    console.log(user)
 
     return (
         <Container>

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { api_v1 }from "../../services/api.js"
 import { Container, FavouriteContainer, H2, Filter, Title } from "./styles";
 import UserDefault from "../../assets/user_default.png"
-import Favorite from "./Favorite";
+import ItemCard from "../Cardapio/ItemCard"
 import { useUserContext } from "../../context/useUserContent";
 
 
@@ -13,8 +13,8 @@ const UserProfile = () => {
     const fetchFavourites = async () => {
         const response = await api_v1.get("favourites",{
             headers:{
-                "X-User-Token": user.authentication_token,
-                "X-User-Email": user.email
+                "X-User-Token": "ePALNwEsYjcxk1b7RbuR",
+                "X-User-Email": "matheus@gmail.com"
             }
         })
         setFavourites(response.data)
@@ -49,7 +49,7 @@ const UserProfile = () => {
             </Filter>
             <FavouriteContainer>
                 {Favourites.map((item, index) => (
-                    <Favorite key={index} id={item.product.id} name={item.product.name} price={item.product.price} photo={item.product.photo_url}/>
+                    <ItemCard key={index} id={item.product.id} name={item.product.name} price={item.product.price} photo={item.product.photo_url}/>
                 ))}
             </FavouriteContainer>
         </>
