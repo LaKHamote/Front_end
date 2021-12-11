@@ -4,10 +4,12 @@ export const BarraLateral = styled.div`
     height: 100%;
     width: 139px;
     background: rgba(255, 147, 69, 1);
-    margin: 50px -8px ;
+    margin: 0 -8px ;
+    top: 0;
     position: fixed;
     display: flex;
     align-items: center;
+    z-index:-1;
     
     a {
         display: flex;
