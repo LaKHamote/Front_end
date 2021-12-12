@@ -9,7 +9,7 @@ export const Container = styled.form`
         height: 130px;
     }
 
-    button, input {
+    button, input, select {
         display: block;
         background-color: rgba(255, 92, 1, 0.85);
         border-radius: 30px;
@@ -20,12 +20,17 @@ export const Container = styled.form`
         font-family: 'Open Sans';
     }
 
-    input {
+    input, select {
         width: 63vw;
         padding-left: 2.5rem;
         ::placeholder {
             color: black;
         }
+    }
+
+    select{
+        width: 65.2vw;
+        height: 3.8rem;
     }
 
     button {

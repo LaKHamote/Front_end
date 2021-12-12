@@ -51,7 +51,7 @@ const Head = ({id, name, price, photo, isFavourite, setIsFavourite}) => {
         navigate("/cardapio/todos")
     }
 
-    api_v1.defaults.headers.common[`X-Admin-Token`] = "AWTJAyYsdzw3eVXV1xhy"
+    api_v1.defaults.headers.common[`X-Admin-Token`] = "xFbXxwizfxs9a9vU-5sz"
     api_v1.defaults.headers.common[`X-Admin-Email`] = "boss@final"
   
   return (
@@ -67,7 +67,6 @@ const Head = ({id, name, price, photo, isFavourite, setIsFavourite}) => {
                 </div>
             </div>
             <p>R$ {price?.toFixed(2)}</p>
-
         </Container>
     )
 }

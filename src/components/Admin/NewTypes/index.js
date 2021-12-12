@@ -14,7 +14,7 @@ const NewType = () => {
     const createType = async (e) => {
         e.preventDefault()
         const response = validateType(newType)
-        api_v1.defaults.headers.common[`X-Admin-Token`] = "AWTJAyYsdzw3eVXV1xhy"
+        api_v1.defaults.headers.common[`X-Admin-Token`] = "xFbXxwizfxs9a9vU-5sz"
         api_v1.defaults.headers.common[`X-Admin-Email`] = "boss@final"
         if(response === "ok") {
             const response = await api_v1.post(`types/create`, {

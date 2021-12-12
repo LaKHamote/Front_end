@@ -1,6 +1,6 @@
 import { Container } from "./styles"
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useUserContext } from "../../../context/useUserContent";
 import { api_v1, controller } from "../../../services/api";
 import ItemDafault from "../../../assets/item_default.png"
@@ -10,17 +10,18 @@ import ItemDafault from "../../../assets/item_default.png"
 const NewProduct = () => {
 
     const [newProduct, setnewProduct] = useState({})
-    const { login } = useUserContext()
     const navigate = useNavigate()
 
     const createUser = async (e) => {
         e.preventDefault()
         const response = validateUser(newProduct)
+        api_v1.defaults.headers.common[`X-Admin-Token`] = "xFbXxwizfxs9a9vU-5sz"
+        api_v1.defaults.headers.common[`X-Admin-Email`] = "boss@final"
         if(response === "ok") {
-            const response = await api_v1.post(`Products/create`, {
+            const response = await api_v1.post(`products/create`, {
                 product: {
                     name: newProduct.name,
-                    type_name: newProduct.type_name,
+                    type_id: newProduct.type_id,
                     price: newProduct.price,
                     quantity: newProduct.quantity,
                     description:newProduct.description
@@ -40,7 +41,7 @@ const NewProduct = () => {
         if(!Product.name) {
             return "Coloque um nome"
         }
-        else if(!Product.type_name) {
+        else if(!Product.type_id) {
             return "Coloque uma categoria"
         }
         else if(!Product.price) {
@@ -57,14 +58,30 @@ const NewProduct = () => {
         }
     }
 
+    const [types, setTypes] = useState([])
+
+    const fetchTypes = async () => {
+        const response = await api_v1.get(`types`)   
+        setTypes(response.data)
+        setnewProduct({...newProduct, type_id: response.data[0].id})
+        }
+    useEffect(() => {
+        fetchTypes()
+    }, [])
+
     return (
         <Container onSubmit={createUser}>
             <img src={ItemDafault} alt="Usuário Padrão"/>
             <button>Adicionar Foto</button>     
-            <input onChange={(e) => setnewProduct({...newProduct, name: e.target.value})} placeholder="Nome" Product="text"/>
-            <input onChange={(e) => setnewProduct({...newProduct, type_id: e.target.value})} placeholder="type_id" Product="text"/>
-            <input onChange={(e) => setnewProduct({...newProduct, price: e.target.value})} placeholder="Price" Product="text"/>
-            <input onChange={(e) => setnewProduct({...newProduct, quantity: e.target.value})} placeholder="Quantity" Product="text"/>
+            <input onChange={(e) => setnewProduct({...newProduct, name: e.target.value})} placeholder="Nome" type="text"/>
+            <select onChange={(e) => setnewProduct({...newProduct, type_id: e.target.value})}>
+                    {types.map((item) => (
+                        <option key={item.id} value={item.id}>{item.name}</option>
+                        ))
+                    }
+            </select>
+            <input onChange={(e) => setnewProduct({...newProduct, price: e.target.value})} placeholder="Price" type="text"/>
+            <input onChange={(e) => setnewProduct({...newProduct, quantity: e.target.value})} placeholder="Quantity" type="text"/>
             <input onChange={(e) => setnewProduct({...newProduct, description: e.target.value})} placeholder="Description" type="text"/>
             <button type="submit">Criar</button>
         </Container>
