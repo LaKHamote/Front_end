@@ -8,11 +8,11 @@ const ItemCard = ({id, name, price, photo}) => {
 
     return (
         <Containerzin>
-            <Link to={`/iteminfo/${id}`}>
+            <Link to={id? `/iteminfo/${id}` : "/NewProduct"}>
                 <img src={photo? controller.defaults.baseURL+photo : ItemDefault} alt="foto do produto"/>
             </Link>
-            <p>{name}</p>
-            <p>R$ {price.toFixed(2)}</p>
+            <p>{name || "Adicionar produto"}</p>
+            <p>{price? ("R$"+price?.toFixed(2)) : null}</p>
         </Containerzin>
     )
 }

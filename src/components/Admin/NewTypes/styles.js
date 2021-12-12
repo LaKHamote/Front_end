@@ -2,12 +2,6 @@ import styled from "styled-components";
 
 export const Container = styled.form`
     margin-top: 2.5rem;
-    img {
-        display: block;
-        margin: auto;
-        width: 180px;
-        height: 160px;
-    }
 
     button, input {
         display: block;

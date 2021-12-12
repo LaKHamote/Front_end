@@ -1,13 +1,13 @@
 import { Container } from "./styles"
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useUserContext } from "../../context/useUserContent";
-import { controller } from "../../services/api";
-import ItemDefault from "../../assets/item_default.png"
+import { useUserContext } from "../../../context/useUserContent";
+import { api_v1, controller } from "../../../services/api";
+import ItemDafault from "../../../assets/item_default.png"
 
 
 
-const Admin = () => {
+const NewProduct = () => {
 
     const [newProduct, setnewProduct] = useState({})
     const { login } = useUserContext()
@@ -17,7 +17,7 @@ const Admin = () => {
         e.preventDefault()
         const response = validateUser(newProduct)
         if(response === "ok") {
-            const response = await controller.post(`products/create`, {
+            const response = await api_v1.post(`Products/create`, {
                 product: {
                     name: newProduct.name,
                     type_name: newProduct.type_name,
@@ -27,9 +27,8 @@ const Admin = () => {
                 }
             });
             if(response) {
-                alert("Usuário criado com sucesso")
-                login(newProduct)
-                navigate('/user/profile')
+                alert("Produto criado com sucesso")
+                navigate('/cardapio/todos')
             }
         }
         else {
@@ -37,20 +36,20 @@ const Admin = () => {
         }
     }
 
-    const validateUser = (product) => {
-        if(!product.name) {
+    const validateUser = (Product) => {
+        if(!Product.name) {
             return "Coloque um nome"
         }
-        else if(!product.type_name) {
+        else if(!Product.type_name) {
             return "Coloque uma categoria"
         }
-        else if(!product.price) {
+        else if(!Product.price) {
             return "Coloque um preço"
         }
-        else if(!product.quantity) {
+        else if(!Product.quantity) {
             return "Coloque a quantidade do item"
         }
-        else if(!product.description) {
+        else if(!Product.description) {
             return "Coloque uma descrição"
         }
         else {
@@ -60,17 +59,16 @@ const Admin = () => {
 
     return (
         <Container onSubmit={createUser}>
-            <img src={ItemDefault} alt="Usuário Padrão"/>
-            <button>Adicionar Foto</button> 
-            <input onChange={(e) => setnewProduct({...newProduct, name: e.target.value})} placeholder="Nome" type="text"/>
-            <input onChange={(e) => setnewProduct({...newProduct, type_id: e.target.value})} placeholder="Type_id" type="text"/>
-            <input onChange={(e) => setnewProduct({...newProduct, price: e.target.value})} placeholder="Price" type="text"/>
-            <input onChange={(e) => setnewProduct({...newProduct, quantity: e.target.value})} placeholder="Quantity" type="text"/>
+            <img src={ItemDafault} alt="Usuário Padrão"/>
+            <button>Adicionar Foto</button>     
+            <input onChange={(e) => setnewProduct({...newProduct, name: e.target.value})} placeholder="Nome" Product="text"/>
+            <input onChange={(e) => setnewProduct({...newProduct, type_id: e.target.value})} placeholder="type_id" Product="text"/>
+            <input onChange={(e) => setnewProduct({...newProduct, price: e.target.value})} placeholder="Price" Product="text"/>
+            <input onChange={(e) => setnewProduct({...newProduct, quantity: e.target.value})} placeholder="Quantity" Product="text"/>
             <input onChange={(e) => setnewProduct({...newProduct, description: e.target.value})} placeholder="Description" type="text"/>
             <button type="submit">Criar</button>
-            <Link to="/login">Criar nova categoria</Link>
         </Container>
     );
 };
 
-export default Admin;
+export default NewProduct;
