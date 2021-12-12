@@ -13,6 +13,9 @@ export const Container = styled.div`
     justify-content: center;
     .photo {
         img {
+            width: 25vw;
+            max-width: 200px;
+            max-height: 200px;
             margin-left: 0.5rem;
         }
         button {

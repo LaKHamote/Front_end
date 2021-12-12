@@ -12,30 +12,33 @@ const Head = ({id, name, price, photo, isFavourite, setIsFavourite}) => {
     const { user } = useUserContext()
 
     const Favoritar = async () => {
-        api_v1.defaults.headers.common[`X-User-Token`] = "JnUAkpoU2ymS1yZ4i3d3"
-        api_v1.defaults.headers.common[`X-User-Email`] = "lucas@gmail.com"
         const response = await api_v1.post(`favourites/create`, {
             favourite: {
                 product_id: id,
-                user_id: 1
+                user_id: user.id
             }
             
         })
     }
 
     const desFavoritar = async () => {
-        api_v1.defaults.headers.common[`X-User-Token`] = "JnUAkpoU2ymS1yZ4i3d3"
-        api_v1.defaults.headers.common[`X-User-Email`] = "lucas@gmail.com"
-        const response = await api_v1.delete(`favourites/delete/${id}`, {
-        })
+        const response = await api_v1.delete(`favourites/delete/${id}`)
     }
 
     const Favouritou = () => {
+        if(!user.authentication_token) {
+            alert("Faça login para favoritar")
+            return
+        }
         setIsFavourite(true)
         Favoritar()
     }
 
     const desFavouritou = () => {
+        if(!user.authentication_token) {
+            alert("Faça login para favoritar")
+            return
+        }
         setIsFavourite(false)
         desFavoritar()
     }

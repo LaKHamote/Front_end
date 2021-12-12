@@ -11,18 +11,15 @@ const UserProfile = () => {
     const {user} = useUserContext()
     const [Favourites, setFavourites] = useState([])
     const fetchFavourites = async () => {
-        const response = await api_v1.get("favourites",{
-            headers:{
-                "X-User-Token": "ePALNwEsYjcxk1b7RbuR",
-                "X-User-Email": "matheus@gmail.com"
-            }
-        })
+        const response = await api_v1.get("favourites")
         setFavourites(response.data)
     }
 
     useEffect(() => {
-        fetchFavourites()
-    }, [])
+        if(user.authentication_token) {
+            fetchFavourites()
+        }
+    }, [user])
 
     return (
         <>

@@ -15,7 +15,7 @@ const Categories = () => {
                 <Link to="/cardapio/lasanha">Lasanhas</Link>
                 <Link to="/cardapio/macarrao">Macarrões</Link>
                 <Link to="/cardapio/bebida">Bebidas</Link>
-                <Link class="edicao" to="/editar">Editar</Link>
+                <Link className="edicao" to="/editar">Editar</Link>
             </div>
         </BarraLateral>
     )

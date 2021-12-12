@@ -7,7 +7,8 @@ import { Link } from 'react-router-dom';
 
 const Nav = () => {
 
-  const { user } = useUserContext()
+  const { user, logout } = useUserContext()
+
   function isEmpty(obj) {
     for(var prop in obj) {
         if(obj.hasOwnProperty(prop))
@@ -25,7 +26,7 @@ const Nav = () => {
             <li><Link to="/">Home</Link></li>
             <li><Link to="/cardapio/todos">Cardapio</Link></li>
             <li className="check-in"><Link to="/login">Login</Link></li>
-            <li className="check-out"><Link to="">Logout</Link></li>
+            <li className="check-out logout"><a onClick={() => logout()}>Logout</a></li>
             <li className="check-in" ><Link to="/register">Registre-se agora</Link></li>
             <li className="check-out userInfo">
               <Link to="/user/profile"> 

@@ -39,6 +39,9 @@ export const Container = styled.nav `
     margin-right: 0rem;
 }
 
+.logout {
+    cursor: pointer;
+}
 
 img {
     width: 2rem;
