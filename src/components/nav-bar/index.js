@@ -7,6 +7,7 @@ const Nav = () => {
           <ul>
             <li><a href="#">Home</a></li>
             <li><a href="#">Cardapio</a></li>
+            <li><a href="#">Favoritos</a></li>
             <li><a href="#">Login</a></li>
             <li><a href="#"> <img src="" alt="Foto de Perfil"/> </a></li>
           </ul>
