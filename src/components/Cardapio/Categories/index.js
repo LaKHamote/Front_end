@@ -4,7 +4,7 @@ import { BarraLateral } from "./styles.js"
 
 const Categories = () => {
 
-    const { isAdmin } = false
+    const isAdmin = true 
 
     return (
         <BarraLateral isAdmin={isAdmin}>
@@ -15,7 +15,7 @@ const Categories = () => {
                 <Link to="/cardapio/lasanha">Lasanhas</Link>
                 <Link to="/cardapio/macarrao">Macarrões</Link>
                 <Link to="/cardapio/bebida">Bebidas</Link>
-                <Link className="edicao" to="/editar">Editar</Link>
+                <Link className="edicao" to="/admin">Editar</Link>
             </div>
         </BarraLateral>
     )

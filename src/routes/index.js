@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
+import Admin from '../components/Admin'
 import UserProfile from '../components/UserProfile'
 import Cardapio from '../pages/Cardapio'
 import ItemInfo from '../pages/ItemInfo'
@@ -13,6 +14,7 @@ const RoutesApp = () => {
             <Route path='/cardapio/:categorie' element={<Cardapio/>}/>
             <Route path='/user/profile' element={<UserProfile/>}/>
             <Route path='/iteminfo/:id' element={<ItemInfo/>}/>
+            <Route path='/admin' element={<Admin/>}/>
         </Routes>
     )
 }
