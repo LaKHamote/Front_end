@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import NavBar from './components/nav-bar/index.js';
 import Footer from './components/footer/index.js'
+import Home from './components/Home/index.js'
 import reportWebVitals from './reportWebVitals';
 import Routes from "./routes";
 import { BrowserRouter } from 'react-router-dom'

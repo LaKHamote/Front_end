@@ -30,7 +30,7 @@ export const Container = styled.nav `
     padding: 1.25rem;
     display: inline-block;
     text-decoration: none;
-    margin: -0.5rem 8rem;
+    margin: -0.5rem 5rem;
     font-weight: bold;
 }
 
