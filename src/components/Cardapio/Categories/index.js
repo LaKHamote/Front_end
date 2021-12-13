@@ -33,6 +33,7 @@ const Categories = () => {
                     <Link key={index} to={`/cardapio/${category.name}`}>{returnProperName(category.name)}</Link>
                 ))}
                 <Link className="edicao" to="/edit/products">Editar</Link>
+                <Link className="edicao" to="/NewType">Criar nova Categoria</Link>
             </div>
         </BarraLateral>
     )

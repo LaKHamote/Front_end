@@ -15,7 +15,6 @@ const Itens = () => {
       setProducts(response.data)
   })}, [])
 
-  
   let newproducts = []
   if (categorie === "todos"){
     newproducts = products
@@ -25,10 +24,10 @@ const Itens = () => {
 
     return (
         <Container>
-            {  newproducts.map((item, index) => (
+            {newproducts.map((item, index) => (
                 <ItemCard key={index} id={item.id} name={item.name} price={item.price} photo={item.photo_url}/>
             ))}
-
+            <ItemCard></ItemCard>
         </Container>
     )
 }

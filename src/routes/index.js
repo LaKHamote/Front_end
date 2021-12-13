@@ -1,4 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
+import NewProduct from '../components/Admin/NewProducts'
+import NewType from '../components/Admin/NewTypes'
 import UserProfile from '../components/UserProfile'
 import Cardapio from '../pages/Cardapio'
 import ItemForm from '../pages/ItemForm'
@@ -15,6 +17,8 @@ const RoutesApp = () => {
             <Route path='/user/profile' element={<UserProfile/>}/>
             <Route path='/iteminfo/:id' element={<ItemInfo/>}/>
             <Route path='/edit/:item' element={<ItemForm/>}/>
+            <Route path='/newproduct' element={<NewProduct/>}/>
+            <Route path='/newtype' element={<NewType/>}/>
         </Routes>
     )
 }
