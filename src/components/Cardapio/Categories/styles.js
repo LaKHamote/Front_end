@@ -1,13 +1,15 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const BarraLateral = styled.div`
     height: 100%;
     width: 139px;
     background: rgba(255, 147, 69, 1);
-    margin: 50px -8px ;
+    margin: 0 -8px ;
+    top: 0;
     position: fixed;
     display: flex;
     align-items: center;
+    z-index:-1;
     
     a {
         display: flex;
@@ -28,5 +30,13 @@ export const BarraLateral = styled.div`
         transform: scale(1.1);
         transition-duration: 500ms;
     }
+
+
+    ${props => !props.isAdmin && css`
+        
+        .edicao {
+            display: none;
+        }
+    `}
 
 `;

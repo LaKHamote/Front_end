@@ -2,13 +2,14 @@ import styled from "styled-components";
 
 export const Container = styled.form`
     margin-top: 2.5rem;
-
     img {
         display: block;
         margin: auto;
+        width: 150px;
+        height: 130px;
     }
 
-    button, input {
+    button, input, select {
         display: block;
         background-color: rgba(255, 92, 1, 0.85);
         border-radius: 30px;
@@ -19,7 +20,7 @@ export const Container = styled.form`
         font-family: 'Open Sans';
     }
 
-    input {
+    input, select {
         width: 63vw;
         padding-left: 2.5rem;
         ::placeholder {
@@ -27,12 +28,13 @@ export const Container = styled.form`
         }
     }
 
-    button {
-        width: 22vw;
+    select{
+        width: 65.2vw;
+        height: 3.8rem;
     }
 
-    p {
-        text-align: center;
+    button {
+        width: 22vw;
     }
 
     a {

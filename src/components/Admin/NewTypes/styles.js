@@ -3,11 +3,6 @@ import styled from "styled-components";
 export const Container = styled.form`
     margin-top: 2.5rem;
 
-    img {
-        display: block;
-        margin: auto;
-    }
-
     button, input {
         display: block;
         background-color: rgba(255, 92, 1, 0.85);
@@ -29,10 +24,6 @@ export const Container = styled.form`
 
     button {
         width: 22vw;
-    }
-
-    p {
-        text-align: center;
     }
 
     a {

@@ -14,7 +14,7 @@ export const Container = styled.footer `
 
 
 footer {
-    position: relative;
+    position:fixed;
     bottom:0;
     width:100%;
     background-color: #FF5C01;
@@ -22,7 +22,7 @@ footer {
 
 ul li {
     display: inline;    
-    padding: 0.3rem 1rem;
+    padding: 0 1rem;
     display: flex;
     justify-content: center;      
     font-weight: bold;
@@ -40,7 +40,7 @@ h5{
     padding: 0.2rem 1rem;
     display: inline-block;
     text-decoration: none;
-    margin: 0.5rem 2rem;
+    margin: 0 2rem;
     font-weight: bold;
 }
 

@@ -24,7 +24,7 @@ export const Container = styled.div`
         .B {
             display: none;
         }
-        div {
+        .crz {
             :hover{
                 .E {
                 display: none;
@@ -45,7 +45,7 @@ export const Container = styled.div`
         .B {
             display: none;
         }
-        div {
+        .crz {
             :hover{
                 .R {
                 display: none;
@@ -57,24 +57,27 @@ export const Container = styled.div`
             }
         }
     `}
-        
-    div {
-            
-        align-self: flex-end;
-        .crz {
+    
+    .icon{
+        display: flex;
+        flex-direction:row;
+        justify-content:space-between;
+        img{
             height: 1.2rem;
             width: auto;
             margin-top: 5px;
-
             @media only screen and (min-width : 850px) {
                 height: 2rem;
             }
+            :hover{
+                transform: scale(1.2);
+                display:flex;
+                transition-duration: 500ms;
+            }
         }
-        cursor: pointer;
-
+        width: 100%;
     }
-
-
+    
     p {
         text-align: center;
         max-width: 180px;
@@ -93,6 +96,16 @@ export const Container = styled.div`
         }
 
     }
+
+    ${props => !props.isAdmin && css` 
+        
+        .lixeira {
+        display: none;
+        }
+        .icon{
+            flex-direction:row-reverse;
+        }
+    `}
 
 
 `;

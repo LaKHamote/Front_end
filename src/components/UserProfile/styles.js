@@ -13,6 +13,9 @@ export const Container = styled.div`
     justify-content: center;
     .photo {
         img {
+            width: 25vw;
+            max-width: 200px;
+            max-height: 200px;
             margin-left: 0.5rem;
         }
         button {
@@ -75,5 +78,6 @@ export const FavouriteContainer = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-initial;
+    padding: 1rem 1rem 6rem 1rem;
 `;

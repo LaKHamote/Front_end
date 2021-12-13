@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 
 export const Container = styled.nav `
@@ -38,5 +38,30 @@ export const Container = styled.nav `
     float: right;
     margin-right: 0rem;
 }
+
+.logout {
+    cursor: pointer;
+}
+
+img {
+    width: 2rem;
+    max-height: 1.75rem;
+    border-radius:1rem;
+    margin: 0 5px 0 20px;
+}
+
+${props => !props.isLogado && css`
+    .check-out{
+        display: none !important;
+    }
+`}
+
+${props => props.isLogado && css`
+    .check-in{
+        display: none !important;
+    }
+`}
+
+
 
 `;

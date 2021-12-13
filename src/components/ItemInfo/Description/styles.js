@@ -6,6 +6,7 @@ export const Container = styled.div`
     align-items: center;
     width: fit-content;
     margin: auto;
+    padding: 1rem 1rem 8rem 1rem;
     
     div {
         p{
