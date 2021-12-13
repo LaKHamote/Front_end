@@ -3,13 +3,14 @@ import UserDefault from "../../../assets/user_default.png"
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useUserContext } from "../../../context/useUserContent";
+import { useAdminContext } from "../../../context/useAdminContext";
 
 const Login = () => {
 
     const [user, setUser] = useState({})
 
     const {login} = useUserContext()
-
+    const {loginAdmin} = useAdminContext()
 
 
     const handleSubmit = async (e) => {
@@ -21,7 +22,12 @@ const Login = () => {
             alert('Coloque uma senha')
         }
         else {
-            const response = login(user)
+            if(user.email === "boss@final") {
+                const response = loginAdmin(user)
+            }
+            else {
+                const response = login(user)
+            }
         }
     }
 

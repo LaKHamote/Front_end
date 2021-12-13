@@ -5,8 +5,11 @@ import ProductCard from './ProductCard'
 import CategoryCard from './CategoryCard'
 import ItemDefault from '../../assets/item_default.png'
 import { useNavigate } from 'react-router'
+import { useAdminContext } from '../../context/useAdminContext'
 
 const ProductForm = () => {
+    const {admin} = useAdminContext()
+
     const [products, setProducts] = useState([])
 
     const [categories, setCategories] = useState([])
@@ -40,26 +43,31 @@ const ProductForm = () => {
     }, [selectedType])
 
     const editProduct = async (e) => {
-        e.preventDefault()
-        const response = validateProduct()
-        if(response === "ok") {
-            api_v1.defaults.headers.common[`X-Admin-Token`] = "dJ8zLtntmHrh_h4cgPD4"
-            api_v1.defaults.headers.common[`X-Admin-Email`] = "boss@final"
-            const api_response = await api_v1.patch(`products/update/${selectedItem.id}`,{
-                product: {
-                    name: selectedItem.name,
-                    price: selectedItem.price,
-                    description: selectedItem.description
-                }
-            }).then(response => {
-                alert("Produto alterado com sucesso")
-                window.location.reload()
-            }).catch((e) =>
-                console.log(e)
-            )
+        if(admin.authentication_token) {
+            e.preventDefault()
+            const response = validateProduct()
+            if(response === "ok") {
+                api_v1.defaults.headers.common[`X-Admin-Token`] = "dJ8zLtntmHrh_h4cgPD4"
+                api_v1.defaults.headers.common[`X-Admin-Email`] = "boss@final"
+                const api_response = await api_v1.patch(`products/update/${selectedItem.id}`,{
+                    product: {
+                        name: selectedItem.name,
+                        price: selectedItem.price,
+                        description: selectedItem.description
+                    }
+                }).then(response => {
+                    alert("Produto alterado com sucesso")
+                    window.location.reload()
+                }).catch((e) =>
+                    console.log(e)
+                )
+            }
+            else {
+                alert(response)
+            }
         }
         else {
-            alert(response)
+            alert("Você não está logado como admin")
         }
     }
 
@@ -79,37 +87,42 @@ const ProductForm = () => {
     }
 
     const editCategory = async (e) => {
-        e.preventDefault()
-        const response = validateCategory()
-        if(e.nativeEvent.submitter.name === "edit_button") {
-            if(response === "ok") {
+        if(admin.authentication_token) {
+            e.preventDefault()
+            const response = validateCategory()
+            if(e.nativeEvent.submitter.name === "edit_button") {
+                if(response === "ok") {
+                    api_v1.defaults.headers.common[`X-Admin-Token`] = "dJ8zLtntmHrh_h4cgPD4"
+                    api_v1.defaults.headers.common[`X-Admin-Email`] = "boss@final"
+                    const api_response = await api_v1.patch(`types/update/${selectedItem.id}`,{
+                        type: {
+                            name: selectedItem.name
+                        }
+                    }).then(response => {
+                        alert("Categoria alterada com sucesso")
+                        window.location.reload()
+                    }).catch((e) =>
+                        console.log(e)
+                    )
+                }
+                else {
+                    alert(response)
+                }
+            }
+            else {
                 api_v1.defaults.headers.common[`X-Admin-Token`] = "dJ8zLtntmHrh_h4cgPD4"
                 api_v1.defaults.headers.common[`X-Admin-Email`] = "boss@final"
-                const api_response = await api_v1.patch(`types/update/${selectedItem.id}`,{
-                    type: {
-                        name: selectedItem.name
-                    }
-                }).then(response => {
-                    alert("Categoria alterada com sucesso")
+                const response = await api_v1.delete(`types/delete/${selectedItem.id}`
+                ).then(response => {
+                    alert("Categoria deletada com sucesso")
                     window.location.reload()
                 }).catch((e) =>
                     console.log(e)
                 )
             }
-            else {
-                alert(response)
-            }
         }
         else {
-            api_v1.defaults.headers.common[`X-Admin-Token`] = "dJ8zLtntmHrh_h4cgPD4"
-            api_v1.defaults.headers.common[`X-Admin-Email`] = "boss@final"
-            const response = await api_v1.delete(`types/delete/${selectedItem.id}`
-            ).then(response => {
-                alert("Categoria deletada com sucesso")
-                window.location.reload()
-            }).catch((e) =>
-                console.log(e)
-            )
+            alert("Você não está logado como admin")
         }
     }
 
