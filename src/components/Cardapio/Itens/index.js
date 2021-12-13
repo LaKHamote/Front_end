@@ -10,7 +10,6 @@ const Itens = () => {
   const {admin} = useAdminContext()
 
   let { categorie } = useParams()
-  
   const [products, setProducts] = useState([])
 
   useEffect (() => {

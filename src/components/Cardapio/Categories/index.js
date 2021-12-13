@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { useAdminContext } from "../../../context/useAdminContext.js"
-import { useUserContext } from "../../../context/useUserContent.js"
 import { api_v1 } from "../../../services/api.js"
 import { BarraLateral } from "./styles.js"
 

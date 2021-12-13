@@ -13,6 +13,7 @@ const Head = ({id, name, price, photo, isFavourite, setIsFavourite}) => {
 
     const { user } = useUserContext()
     const navigate = useNavigate()
+    const isAdmin = false
 
     const Favoritar = async () => {
         const response = await api_v1.post(`favourites/create`, {
@@ -51,23 +52,22 @@ const Head = ({id, name, price, photo, isFavourite, setIsFavourite}) => {
         navigate("/cardapio/todos")
     }
 
-    api_v1.defaults.headers.common[`X-Admin-Token`] = "AWTJAyYsdzw3eVXV1xhy"
+    api_v1.defaults.headers.common[`X-Admin-Token`] = "xFbXxwizfxs9a9vU-5sz"
     api_v1.defaults.headers.common[`X-Admin-Email`] = "boss@final"
   
   return (
-        <Container isFavourite={isFavourite}>
+        <Container isAdmin={isAdmin} isFavourite={isFavourite}>
             <h1>{name}</h1>
             <img className="item" src={photo? controller.defaults.baseURL+photo : ItemDefault} alt="foto do produto"/>
             <div className="icon" >
                 <img onClick={() => (deletar())} className="lixeira" src={Lixeira}/>
                 <div className="crz" >
-                    <img className="crz E" src={CoracaoEmpty}/>
-                    <img onClick={() => (Favouritou())} className="crz R" src={CoracaoRed}/>
-                    <img onClick={() => (desFavouritou())}className="crz B" src={CoracaoBroken}/>
+                    <img className="E" src={CoracaoEmpty}/>
+                    <img onClick={() => (Favouritou())} className="R" src={CoracaoRed}/>
+                    <img onClick={() => (desFavouritou())}className="B" src={CoracaoBroken}/>
                 </div>
             </div>
             <p>R$ {price?.toFixed(2)}</p>
-
         </Container>
     )
 }
