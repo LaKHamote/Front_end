@@ -32,7 +32,6 @@ const AdminProvider = ({children}) => {
         .then( response => {
             setAdmin(response.data)
             Cookie.set('admin.info', JSON.stringify(response.data), { expires: 1 })
-            navigate('/cardapio/todos')
         })
         .catch(error => {
             switch(error.message) {
@@ -58,7 +57,6 @@ const AdminProvider = ({children}) => {
         .then( response => {
             setAdmin({})
             Cookie.remove('admin.info')
-            navigate('/login')
         })
     }
 
