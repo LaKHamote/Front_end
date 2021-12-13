@@ -7,7 +7,6 @@ import { Container } from "./styles.js"
 const Itens = () => {
 
   let { categorie } = useParams()
-  
   const [products, setProducts] = useState([])
 
   useEffect (() => {
@@ -22,12 +21,14 @@ const Itens = () => {
     newproducts = products.filter((products) => (products.type_name === categorie))
   }
 
+  const isAdmin = true
+
     return (
         <Container>
             {newproducts.map((item, index) => (
                 <ItemCard key={index} id={item.id} name={item.name} price={item.price} photo={item.photo_url}/>
             ))}
-            <ItemCard></ItemCard>
+            {isAdmin && <ItemCard></ItemCard>}
         </Container>
     )
 }

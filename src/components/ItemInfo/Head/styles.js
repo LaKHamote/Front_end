@@ -77,43 +77,7 @@ export const Container = styled.div`
         }
         width: 100%;
     }
-
-    /* .lixeira {
-        
-        
-        
-        .crz {
-            align-self: flex-start;
-            .icon {
-                height: 1.2rem;
-                width: auto;
-                margin-top: 5px;
-                @media only screen and (min-width : 850px) {
-                    height: 2rem;
-                }
-            }
-            cursor: pointer;
-        }
-        width: fit-content;
-        display: flex;
-        cursor: pointer;
-        .icon {
-            align-self:flex-end;
-            height: 1.2rem;
-            width: auto;
-            margin-top: 5px;
-            @media only screen and (min-width : 850px) {
-                height: 2rem;
-            }
-        }
-        cursor: pointer;
-        :hover{
-            transform: scale(1.3);
-            display:flex;
-            transition-duration: 500ms;
-        }
-    } */
-
+    
     p {
         text-align: center;
         max-width: 180px;
@@ -132,6 +96,16 @@ export const Container = styled.div`
         }
 
     }
+
+    ${props => props.isAdmin && css` 
+        
+        .lixeira {
+        display: none;
+        }
+        .icon{
+            flex-direction:row-reverse;
+        }
+    `}
 
 
 `;

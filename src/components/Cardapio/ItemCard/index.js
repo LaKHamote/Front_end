@@ -12,7 +12,7 @@ const ItemCard = ({id, name, price, photo}) => {
                 <img src={photo? controller.defaults.baseURL+photo : ItemDefault} alt="foto do produto"/>
             </Link>
             <p>{name || "Adicionar produto"}</p>
-            <p>{price? ("R$"+price?.toFixed(2)) : null}</p>
+            <p>{price && ("R$"+price?.toFixed(2))}</p>
         </Containerzin>
     )
 }
