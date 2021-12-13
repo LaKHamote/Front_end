@@ -73,13 +73,16 @@ const ProductForm = () => {
                 }
             }
             else {
-                const response = await api_v1.delete(`products/delete/${selectedItem.id}`
-                ).then(response => {
-                    alert("Produto deletado com sucesso")
-                    navigate("/cardapio/todos")
-                }).catch((e) =>
-                    console.log(e)
-                )
+                let confirmacao = window.confirm("Tem certeza que deseja deletar esse produto?")
+                if (confirmacao){
+                    const response = await api_v1.delete(`products/delete/${selectedItem.id}`
+                    ).then(response => {
+                        alert("Produto deletado com sucesso")
+                        navigate("/cardapio/todos")
+                    }).catch((e) =>
+                        console.log(e)
+                    )
+                }
             }
         }
         else {
@@ -127,13 +130,16 @@ const ProductForm = () => {
                 }
             }
             else {
-                const response = await api_v1.delete(`types/delete/${selectedItem.id}`
-                ).then(response => {
-                    alert("Categoria deletada com sucesso")
-                    window.location.reload()
-                }).catch((e) =>
-                    console.log(e)
-                )
+                let confirmacao = window.confirm("Tem certeza que deseja deletar essa categoria?")
+                if (confirmacao){
+                    const response = await api_v1.delete(`types/delete/${selectedItem.id}`
+                    ).then(response => {
+                        alert("Categoria deletada com sucesso")
+                        window.location.reload()
+                    }).catch((e) =>
+                        console.log(e)
+                    )
+                }
             }
         }
         else {
