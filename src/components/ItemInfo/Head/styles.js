@@ -97,7 +97,7 @@ export const Container = styled.div`
 
     }
 
-    ${props => props.isAdmin && css` 
+    ${props => !props.isAdmin && css` 
         
         .lixeira {
         display: none;

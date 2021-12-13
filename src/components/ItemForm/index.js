@@ -4,7 +4,6 @@ import { ButtonDiv, CategoriesDiv, Container, Form, ProductDiv } from './styles'
 import ProductCard from './ProductCard'
 import CategoryCard from './CategoryCard'
 import ItemDefault from '../../assets/item_default.png'
-import { useNavigate } from 'react-router'
 import { useAdminContext } from '../../context/useAdminContext'
 
 const ProductForm = () => {
@@ -17,8 +16,6 @@ const ProductForm = () => {
     const [selectedType, setSelectedType] = useState("products")
 
     const [selectedItem, setSelectedItem] = useState({})
-
-    const navigate = useNavigate()
 
     const getProducts = async () => {
         api_v1.get('products').then((response) => {
@@ -47,8 +44,6 @@ const ProductForm = () => {
             e.preventDefault()
             const response = validateProduct()
             if(response === "ok") {
-                api_v1.defaults.headers.common[`X-Admin-Token`] = "dJ8zLtntmHrh_h4cgPD4"
-                api_v1.defaults.headers.common[`X-Admin-Email`] = "boss@final"
                 const api_response = await api_v1.patch(`products/update/${selectedItem.id}`,{
                     product: {
                         name: selectedItem.name,
@@ -92,8 +87,6 @@ const ProductForm = () => {
             const response = validateCategory()
             if(e.nativeEvent.submitter.name === "edit_button") {
                 if(response === "ok") {
-                    api_v1.defaults.headers.common[`X-Admin-Token`] = "dJ8zLtntmHrh_h4cgPD4"
-                    api_v1.defaults.headers.common[`X-Admin-Email`] = "boss@final"
                     const api_response = await api_v1.patch(`types/update/${selectedItem.id}`,{
                         type: {
                             name: selectedItem.name
@@ -110,8 +103,6 @@ const ProductForm = () => {
                 }
             }
             else {
-                api_v1.defaults.headers.common[`X-Admin-Token`] = "dJ8zLtntmHrh_h4cgPD4"
-                api_v1.defaults.headers.common[`X-Admin-Email`] = "boss@final"
                 const response = await api_v1.delete(`types/delete/${selectedItem.id}`
                 ).then(response => {
                     alert("Categoria deletada com sucesso")

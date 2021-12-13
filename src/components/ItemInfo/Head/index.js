@@ -7,13 +7,15 @@ import { api_v1, controller } from "../../../services/api.js"
 import { useUserContext } from "../../../context/useUserContent.js"
 import Lixeira from "../../../assets/lixeira.png"
 import { useNavigate } from "react-router"
+import { useAdminContext } from "../../../context/useAdminContext.js"
 
 
 const Head = ({id, name, price, photo, isFavourite, setIsFavourite}) => {
 
     const { user } = useUserContext()
+    const { admin } = useAdminContext()
     const navigate = useNavigate()
-    const isAdmin = false
+    const isAdmin = admin.authentication_token && true
 
     const Favoritar = async () => {
         const response = await api_v1.post(`favourites/create`, {
@@ -48,12 +50,14 @@ const Head = ({id, name, price, photo, isFavourite, setIsFavourite}) => {
     }
 
     const deletar = async () => {
-        const response = await api_v1.delete(`products/delete/${id}`)
-        navigate("/cardapio/todos")
+        if(admin.authentication_token) {
+            const response = await api_v1.delete(`products/delete/${id}`)
+            navigate("/cardapio/todos")
+        }
+        else {
+            alert("Você não está logado como admin")
+        }
     }
-
-    api_v1.defaults.headers.common[`X-Admin-Token`] = "xFbXxwizfxs9a9vU-5sz"
-    api_v1.defaults.headers.common[`X-Admin-Email`] = "boss@final"
   
   return (
         <Container isAdmin={isAdmin} isFavourite={isFavourite}>
