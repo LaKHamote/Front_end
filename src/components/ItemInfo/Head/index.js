@@ -50,13 +50,16 @@ const Head = ({id, name, price, photo, isFavourite, setIsFavourite}) => {
     }
 
     const deletar = async () => {
-        if(admin.authentication_token) {
-            const response = await api_v1.delete(`products/delete/${id}`)
-            navigate("/cardapio/todos")
-        }
-        else {
-            alert("Você não está logado como admin")
-        }
+        let confirmacao = window.confirm("Tem certeza que deseja deletar esse item?")
+        if (confirmacao){
+            if(admin.authentication_token) {
+                const response = await api_v1.delete(`products/delete/${id}`)
+                navigate("/cardapio/todos")
+            }
+            else {
+                alert("Você não está logado como admin")
+            }
+    }
     }
   
   return (

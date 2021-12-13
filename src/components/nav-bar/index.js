@@ -4,14 +4,12 @@ import {Container} from './styles'
 import UserDefault from "../../assets/user_default.png"
 import { Link } from 'react-router-dom';
 import { useAdminContext } from '../../context/useAdminContext';
-import { useNavigate } from 'react-router';
 
 const Nav = () => {
 
   const { admin } = useAdminContext()
   const { user, logout } = useUserContext()
   const { logoutAdmin } = useAdminContext()
-  const navigate = useNavigate()
 
   function isEmpty(obj) {
     for(var prop in obj) {
