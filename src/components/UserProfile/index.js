@@ -12,7 +12,7 @@ const UserProfile = () => {
     const [Favourites, setFavourites] = useState([])
     const fetchFavourites = async () => {
         const response = await api_v1.get("favourites")
-        setFavourites(response.data)
+        setFavourites(response.data.sort(sortByPrice))
     }
 
     useEffect(() => {
@@ -20,6 +20,35 @@ const UserProfile = () => {
             fetchFavourites()
         }
     }, [user])
+
+    const sortByPrice = (a, b) => (a.product.price - b.product.price)
+    
+    const sortByName = (a, b) => {
+        let x = a.product.name.toLowerCase();
+        let y = b.product.name.toLowerCase();
+        if (x < y) return -1;
+        if (x > y) return 1;
+        return 0;
+    }
+
+    const sort = (method) => {
+        switch(method) {
+            case "pn":
+                setFavourites([...Favourites.sort(sortByPrice)])
+                break;
+            case "pr":
+                setFavourites([...Favourites.sort(sortByPrice).reverse()])
+                break;
+            case "nn":
+                setFavourites([...Favourites.sort(sortByName)])
+                break;
+            case "nr":
+                setFavourites([...Favourites.sort(sortByName).reverse()])
+                break;
+            default:
+                console.log("Error")
+        }
+    }
 
     return (
         <>
@@ -37,11 +66,11 @@ const UserProfile = () => {
             <H2>Meus Favoritos</H2>
             <Filter>
                 <label>Ordenar por:</label>
-                <select>
-                    <option>Preço(ordem crescente)</option>
-                    <option>Preço(ordem crescente)</option>
-                    <option>Alfabética(normal)</option>
-                    <option>Alfabética(ao contrário)</option>
+                <select onChange={(e) => sort(e.target.value)}>
+                    <option value="pn">Preço(ordem crescente)</option>
+                    <option value="pr">Preço(ordem decrescente)</option>
+                    <option value="nn">Alfabética(normal)</option>
+                    <option value="nr">Alfabética(ao contrário)</option>
                 </select>
             </Filter>
             <FavouriteContainer>
