@@ -65,7 +65,6 @@ const UserProfile = () => {
             try{
                 const formData = new FormData()
                 formData.append('image[]', image[0])
-    
                 const response = await controller.post(`user/add_image/${user.id}`, formData)
                 if(response.data){
                     setImage(response.data)
@@ -93,7 +92,9 @@ const UserProfile = () => {
                     <form onSubmit={addImage} className="confirmarFoto">
                         <input onChange={(e) => setImage(e.target.files)} type="file"/>
                         <button type='submit'>Confirmar Imagem</button>
-                        <button type='submit'>Manter foto</button>
+                        <button
+                            onClick={(e) =>{setchangePhoto(false)}}>
+                            Manter foto</button>
                     </form>
                 </div>
                 <div className="info">
