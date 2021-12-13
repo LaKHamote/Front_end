@@ -3,11 +3,14 @@ import { controller } from '../../services/api';
 import {Container} from './styles'
 import UserDefault from "../../assets/user_default.png"
 import { Link } from 'react-router-dom';
+import { useAdminContext } from '../../context/useAdminContext';
 
 
 const Nav = () => {
 
+  const { admin } = useAdminContext()
   const { user, logout } = useUserContext()
+  const { logoutAdmin } = useAdminContext()
 
   function isEmpty(obj) {
     for(var prop in obj) {
@@ -19,6 +22,15 @@ const Nav = () => {
   }
   const isLogado = !isEmpty(user)
 
+  const makeLogout = () => {
+    if(admin.authentication_token) {
+      logoutAdmin()
+    }
+    else {
+      logout()
+    }
+  }
+
   return (
     <Container isLogado={isLogado}>
         <nav id="menu-h">
@@ -26,7 +38,7 @@ const Nav = () => {
             <li><Link to="/">Home</Link></li>
             <li><Link to="/cardapio/todos">Cardapio</Link></li>
             <li className="check-in"><Link to="/login">Login</Link></li>
-            <li className="check-out logout"><a onClick={() => logout()}>Logout</a></li>
+            <li className={`${admin.authentication_token?"check-in":"check-out"} logout`}><a onClick={() => makeLogout()}>Logout</a></li>
             <li className="check-in" ><Link to="/register">Registre-se agora</Link></li>
             <li className="check-out userInfo">
               <Link to="/user/profile"> 

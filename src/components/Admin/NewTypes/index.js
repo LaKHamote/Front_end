@@ -2,33 +2,39 @@ import { Container } from "./styles"
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { api_v1 } from "../../../services/api";
+import { useAdminContext } from "../../../context/useAdminContext";
 
 
 
 
 const NewType = () => {
 
+    const {admin} = useAdminContext()
+
     const [newType, setnewType] = useState({})
     const navigate = useNavigate()
 
     const createType = async (e) => {
-        e.preventDefault()
-        const response = validateType(newType)
-        api_v1.defaults.headers.common[`X-Admin-Token`] = "xFbXxwizfxs9a9vU-5sz"
-        api_v1.defaults.headers.common[`X-Admin-Email`] = "boss@final"
-        if(response === "ok") {
-            const response = await api_v1.post(`types/create`, {
-                type: {
-                    name: newType.name,
+        if(admin.authentication_token) {
+            e.preventDefault()
+            const response = validateType(newType)
+            if(response === "ok") {
+                const response = await api_v1.post(`types/create`, {
+                    type: {
+                        name: newType.name,
+                    }
+                });
+                if(response) {
+                    alert("Categoria criada com sucesso")
+                    navigate('/cardapio/todos')
                 }
-            });
-            if(response) {
-                alert("Categoria criada com sucesso")
-                navigate('/cardapio/todos')
+            }
+            else {
+                alert(response);
             }
         }
         else {
-            alert(response);
+            alert("Você não está logado como admin")
         }
     }
 

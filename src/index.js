@@ -7,16 +7,19 @@ import reportWebVitals from './reportWebVitals';
 import Routes from "./routes";
 import { BrowserRouter } from 'react-router-dom'
 import { UserProvider } from "./context/useUserContent"
+import { AdminProvider } from './context/useAdminContext';
 
 
 ReactDOM.render(
     <React.StrictMode>
       <BrowserRouter>
-        <UserProvider>
-          <NavBar />
+        <AdminProvider>
+          <UserProvider>
+            <NavBar/>
             <Routes/>
-          <Footer />
-        </UserProvider>
+            <Footer/>
+          </UserProvider>
+        </AdminProvider>
       </BrowserRouter>
     </React.StrictMode>,
     document.getElementById('root')

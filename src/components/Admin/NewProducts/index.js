@@ -1,39 +1,43 @@
 import { Container } from "./styles"
 import { useNavigate } from "react-router-dom";
+import { api_v1 } from "../../../services/api";
 import { useEffect, useState } from "react";
-import { useUserContext } from "../../../context/useUserContent";
-import { api_v1, controller } from "../../../services/api";
 import ItemDafault from "../../../assets/item_default.png"
+import { useAdminContext } from "../../../context/useAdminContext";
 
 
 
 const NewProduct = () => {
 
+    const {admin} = useAdminContext()
     const [newProduct, setnewProduct] = useState({})
     const navigate = useNavigate()
 
     const createUser = async (e) => {
-        e.preventDefault()
-        const response = validateUser(newProduct)
-        api_v1.defaults.headers.common[`X-Admin-Token`] = "xFbXxwizfxs9a9vU-5sz"
-        api_v1.defaults.headers.common[`X-Admin-Email`] = "boss@final"
-        if(response === "ok") {
-            const response = await api_v1.post(`products/create`, {
-                product: {
-                    name: newProduct.name,
-                    type_id: newProduct.type_id,
-                    price: newProduct.price,
-                    quantity: newProduct.quantity,
-                    description:newProduct.description
+        if(admin.authentication_token){
+            e.preventDefault()
+            const response = validateUser(newProduct)
+            if(response === "ok") {
+                const response = await api_v1.post(`Products/create`, {
+                    product: {
+                        name: newProduct.name,
+                        type_id: newProduct.type_id,
+                        price: newProduct.price,
+                        quantity: newProduct.quantity,
+                        description:newProduct.description
+                    }
+                });
+                if(response) {
+                    alert("Produto criado com sucesso")
+                    navigate('/cardapio/todos')
                 }
-            });
-            if(response) {
-                alert("Produto criado com sucesso")
-                navigate('/cardapio/todos')
+            }
+            else {
+                alert(response);
             }
         }
         else {
-            alert(response);
+            alert("Você não está logado como admin")
         }
     }
 
