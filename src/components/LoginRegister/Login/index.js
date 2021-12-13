@@ -24,6 +24,7 @@ const Login = () => {
         else {
             if(user.email === "boss@final") {
                 const response = loginAdmin(user)
+                const response2 = login(user)
             }
             else {
                 const response = login(user)

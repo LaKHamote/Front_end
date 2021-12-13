@@ -18,7 +18,7 @@ const NewProduct = () => {
             e.preventDefault()
             const response = validateUser(newProduct)
             if(response === "ok") {
-                const response = await api_v1.post(`Products/create`, {
+                const response = await api_v1.post(`products/create`, {
                     product: {
                         name: newProduct.name,
                         type_id: newProduct.type_id,
