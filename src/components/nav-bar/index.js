@@ -4,13 +4,14 @@ import {Container} from './styles'
 import UserDefault from "../../assets/user_default.png"
 import { Link } from 'react-router-dom';
 import { useAdminContext } from '../../context/useAdminContext';
-
+import { useNavigate } from 'react-router';
 
 const Nav = () => {
 
   const { admin } = useAdminContext()
   const { user, logout } = useUserContext()
   const { logoutAdmin } = useAdminContext()
+  const navigate = useNavigate()
 
   function isEmpty(obj) {
     for(var prop in obj) {
@@ -20,15 +21,18 @@ const Nav = () => {
 
     return true;
   }
-  const isLogado = !isEmpty(user)
+  const isLogado = !isEmpty(user) || !isEmpty(admin)
 
   const makeLogout = () => {
-    if(admin.authentication_token) {
-      logoutAdmin()
-      logout()
-    }
-    else {
-      logout()
+    let confirmacao = window.confirm("Tem certeza que deseja deslogar?")
+    if (confirmacao){
+      if(admin.authentication_token) {
+        logoutAdmin()
+        logout()
+      }
+      else {
+        logout() 
+      }
     }
   }
 

@@ -58,7 +58,7 @@ const UserProvider = ({children}) => {
         .then( response => {
             setUser({})
             Cookie.remove('user.info')
-            navigate('/login')
+            navigate('/')
         })
     }
 

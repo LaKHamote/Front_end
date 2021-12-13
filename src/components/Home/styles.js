@@ -13,7 +13,7 @@ export const Container = styled.nav `
         display: flex;
         justify-content: center;
         height: 100vh;
-        width: 100vw;
+        width: 99vw;
         box-sizing: border-box;
     }
     
@@ -143,4 +143,6 @@ export const Container = styled.nav `
         opacity: 0.8;
         transition: 500ms ease;
     }
+
+
 `;

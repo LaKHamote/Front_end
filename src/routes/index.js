@@ -7,10 +7,12 @@ import ItemForm from '../pages/ItemForm'
 import ItemInfo from '../pages/ItemInfo'
 import Login from '../pages/Login'
 import Register from '../pages/Register'
+import Home from "../components/Home"
 
 const RoutesApp = () => {
     return (
         <Routes>
+            <Route path='/' element={<Home/>}/>
             <Route path='/login' element={<Login/>}/>
             <Route path='/register' element={<Register/>}/>
             <Route path='/cardapio/:categorie' element={<Cardapio/>}/>

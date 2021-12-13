@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const Title = styled.h1`
     text-align: center;
@@ -47,6 +47,11 @@ export const Container = styled.div`
             margin-left: 0;
         }
     }
+
+    ${props => props.changePhoto && css` 
+        background: blue;
+    `}
+
 `;
 
 export const H2 = styled.h2`

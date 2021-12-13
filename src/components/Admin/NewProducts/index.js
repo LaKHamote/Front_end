@@ -42,10 +42,11 @@ const NewProduct = () => {
     }
 
     const validateUser = (Product) => {
+        console.log(Product)
         if(!Product.name) {
             return "Coloque um nome"
         }
-        else if(!Product.type_id) {
+        else if(!Product.type_id || Product.type_id === "false") {
             return "Coloque uma categoria"
         }
         else if(!Product.price) {
@@ -67,7 +68,6 @@ const NewProduct = () => {
     const fetchTypes = async () => {
         const response = await api_v1.get(`types`)   
         setTypes(response.data)
-        setnewProduct({...newProduct, type_id: response.data[0].id})
         }
     useEffect(() => {
         fetchTypes()
@@ -75,10 +75,10 @@ const NewProduct = () => {
 
     return (
         <Container onSubmit={createUser}>
-            <img src={ItemDafault} alt="Usuário Padrão"/>
-            <button>Adicionar Foto</button>     
+            <img src={ItemDafault} alt="Usuário Padrão"/>   
             <input onChange={(e) => setnewProduct({...newProduct, name: e.target.value})} placeholder="Nome" type="text"/>
             <select onChange={(e) => setnewProduct({...newProduct, type_id: e.target.value})}>
+                    <option value={false}>{"--Selecione uma categoria--"}</option>
                     {types.map((item) => (
                         <option key={item.id} value={item.id}>{item.name}</option>
                         ))

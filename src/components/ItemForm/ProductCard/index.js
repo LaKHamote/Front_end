@@ -3,13 +3,14 @@ import { controller } from '../../../services/api'
 import { Container } from './styles'
 import ItemDefault from '../../../assets/item_default.png'
 
-const ProductCard = ({id, name, photo, price, description, selectedItem, setSelectedItem}) => {
+const ProductCard = ({id, name, photo, price, quantity, description, selectedItem, setSelectedItem}) => {
     return (
         <Container onClick={() => setSelectedItem({
             id: id,
             name: name,
             photo: photo,
             price: price,
+            quantity: quantity,
             description: description
         })} selectedItem={selectedItem}>
             <img src={photo? controller.defaults.baseURL+photo : ItemDefault} alt="foto do produto"/>

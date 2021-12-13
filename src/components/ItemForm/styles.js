@@ -6,6 +6,10 @@ export const Container = styled.div`
     h1 {
         text-align: center;
     }
+    a{
+        text-decoration:none;
+        color: inherit;
+    }
 `;
 
 export const ButtonDiv = styled.div`
@@ -51,6 +55,7 @@ export const CategoriesDiv = styled.div`
 `;
 
 export const Form = styled.form`
+    padding: 1rem 0 0 0 ;
     img {
         margin: auto;
         display: block;

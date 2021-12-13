@@ -5,8 +5,10 @@ import ProductCard from './ProductCard'
 import CategoryCard from './CategoryCard'
 import ItemDefault from '../../assets/item_default.png'
 import { useAdminContext } from '../../context/useAdminContext'
+import { useNavigate } from 'react-router'
 
 const ProductForm = () => {
+
     const {admin} = useAdminContext()
 
     const [products, setProducts] = useState([])
@@ -16,6 +18,10 @@ const ProductForm = () => {
     const [selectedType, setSelectedType] = useState("products")
 
     const [selectedItem, setSelectedItem] = useState({})
+    
+    const [ image, setImage ] = useState([])
+
+    const navigate = useNavigate()
 
     const getProducts = async () => {
         api_v1.get('products').then((response) => {
@@ -41,24 +47,39 @@ const ProductForm = () => {
 
     const editProduct = async (e) => {
         if(admin.authentication_token) {
-            e.preventDefault()
+            e?.preventDefault()
             const response = validateProduct()
-            if(response === "ok") {
-                const api_response = await api_v1.patch(`products/update/${selectedItem.id}`,{
-                    product: {
-                        name: selectedItem.name,
-                        price: selectedItem.price,
-                        description: selectedItem.description
-                    }
-                }).then(response => {
-                    alert("Produto alterado com sucesso")
-                    window.location.reload()
+            if(image.length > 0){
+                addImage(e)
+            }
+            if(e.nativeEvent.submitter.name === "edit_button") {
+                if(response === "ok") {
+                    const api_response = await api_v1.patch(`products/update/${selectedItem.id}`,{
+                        product: {
+                                name: selectedItem.name,
+                                price: selectedItem.price,
+                                quantity: selectedItem.quantity,
+                                description: selectedItem.description
+                            }
+                    }).then(response => {
+                        alert("Produto alterada com sucesso")
+                        navigate("/cardapio/todos")
+                    }).catch((e) =>
+                        console.log(e)
+                    )
+                }
+                else {
+                    alert(response)
+                }
+            }
+            else {
+                const response = await api_v1.delete(`products/delete/${selectedItem.id}`
+                ).then(response => {
+                    alert("Produto deletado com sucesso")
+                    navigate("/cardapio/todos")
                 }).catch((e) =>
                     console.log(e)
                 )
-            }
-            else {
-                alert(response)
             }
         }
         else {
@@ -73,6 +94,9 @@ const ProductForm = () => {
         else if(!selectedItem.price) {
             return "Coloque um preço válido"
         }
+        else if(!selectedItem.quantity) {
+            return "Coloque uma quantia válida"
+        }
         else if(!selectedItem.description) {
             return "Coloque uma descrição válida"
         }
@@ -83,7 +107,7 @@ const ProductForm = () => {
 
     const editCategory = async (e) => {
         if(admin.authentication_token) {
-            e.preventDefault()
+            e?.preventDefault()
             const response = validateCategory()
             if(e.nativeEvent.submitter.name === "edit_button") {
                 if(response === "ok") {
@@ -126,6 +150,24 @@ const ProductForm = () => {
         }
     }
 
+    const addImage = async (e) => {
+        e.preventDefault()
+        try{
+            const formData = new FormData()
+            formData.append('image[]', image[0])
+
+            const response = await api_v1.post(`products/add_image/${selectedItem.id}`, formData)
+            if(response.data){
+                setImage(response.data)
+            }
+        }catch(error){
+            alert(error)   
+        }
+    }
+       
+
+
+
     return (
         <Container>
             <ButtonDiv selectedType={selectedType}>
@@ -137,7 +179,9 @@ const ProductForm = () => {
                 selectedType==="products"?
                 <ProductDiv>
                     {products.map((product, index) => {
-                        return <ProductCard setSelectedItem={setSelectedItem} selectedItem={selectedItem?selectedItem.id===product.id:false} key={"p" + index} id={product.id} name={product.name} price={product.price} photo={product.photo_url} description={product.description}/>
+                        return <a href="#target">
+                        <ProductCard setSelectedItem={setSelectedItem} selectedItem={selectedItem?selectedItem.id===product.id:false} key={"p" + index} id={product.id} name={product.name} price={product.price} photo={product.photo_url} quantity={product.quantity} description={product.description}/>
+                                </a>
                     })}
                 </ProductDiv>
                 : 
@@ -148,21 +192,27 @@ const ProductForm = () => {
                 </CategoriesDiv>
             }
             {
-                selectedType==="products"?
+            selectedType==="products"?
+            <a name="target" >
                 <Form onSubmit={editProduct}>
                     <img src={selectedItem.photo? controller.defaults.baseURL+selectedItem.photo : ItemDefault} alt="foto do produto"/>
-                    <input type="file"/>
+                    <input onChange={(e) => setImage(e.target.files)} type="file"/>
                     <input onChange={(e) => setSelectedItem({...selectedItem, name: e.target.value})} placeholder="Nome" type="text" value={selectedItem.name}/>
                     <input onChange={(e) => setSelectedItem({...selectedItem, price: e.target.value})} placeholder="Preço" type="text" value={selectedItem.price}/>
+                    <input onChange={(e) => setSelectedItem({...selectedItem, quantity: e.target.value})} placeholder="Quantity" type="text" value={selectedItem.quantity}/>
                     <textarea onChange={(e) => setSelectedItem({...selectedItem, description: e.target.value})} placeholder="Descrição" type="text" value={selectedItem.description}/>
-                    <button type='submit'>Alterar Produto</button>
+                    <button type='submit' name='edit_button' >Alterar Produto</button>
+                    <button type='submit' name='delete_button'>Deletar Produto</button>
                 </Form>
-                :
-                <Form onSubmit={editCategory}>
-                    <input onChange={(e) => setSelectedItem({...selectedItem, name: e.target.value})} value={selectedItem.name} placeholder="Nome" type="text"/>
-                    <button type='submit' name='edit_button'>Alterar Categoria</button>
-                    <button type='submit' name='delete_button'>Deletar Categoria</button>
-                </Form>
+            </a>
+                        
+            :
+            
+            <Form onSubmit={editCategory}>
+                <input onChange={(e) => setSelectedItem({...selectedItem, name: e.target.value})} value={selectedItem.name} placeholder="Nome" type="text"/>
+                <button type='submit' name='edit_button'>Alterar Categoria</button>
+                <button type='submit' name='delete_button'>Deletar Categoria</button>
+            </Form>
             }
         </Container>
     )

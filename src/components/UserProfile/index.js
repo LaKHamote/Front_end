@@ -1,15 +1,22 @@
 import { useEffect, useState } from "react"
-import { api_v1 }from "../../services/api.js"
+import { api_v1, controller }from "../../services/api.js"
 import { Container, FavouriteContainer, H2, Filter, Title } from "./styles";
 import UserDefault from "../../assets/user_default.png"
 import ItemCard from "../Cardapio/ItemCard"
 import { useUserContext } from "../../context/useUserContent";
 
 
+
 const UserProfile = () => {
     
     const {user} = useUserContext()
+
     const [Favourites, setFavourites] = useState([])
+
+    const [ image, setImage ] = useState([])
+
+    const [changePhoto, setchangePhoto] = useState(false)
+
     const fetchFavourites = async () => {
         const response = await api_v1.get("favourites")
         setFavourites(response.data.sort(sortByPrice))
@@ -50,13 +57,35 @@ const UserProfile = () => {
         }
     }
 
+    const addImage = async (e) => {
+        e.preventDefault()
+        try{
+            const formData = new FormData()
+            formData.append('image[]', image[0])
+
+            const response = await controller.post(`user/add_image/${user.id}`, formData)
+            if(response.data){
+                setImage(response.data)
+            }
+        }catch(error){
+            alert(error)   
+        }
+    }
+
+    
+       
+
     return (
         <>
             <Title>Bem Vindo</Title>
-            <Container>
+            <Container changePhoto={changePhoto}>
                 <div className="photo">
-                    <img src={user.profile_picture_url?  "http://localhost:3000"+user.profile_picture_url : UserDefault} alt="Imagem do usuário"/>
-                    <button>Trocar Foto</button>
+                    <form onSubmit={(e) =>{ e.preventDefault() 
+                                            setchangePhoto(true)}}>
+                        <img src={user.profile_picture_url?  controller.defaults.baseURL+user.profile_picture_url : UserDefault} alt="Imagem do usuário"/>
+                        <button type="submit" >Gostaria de trocar sua foto?</button>
+                        
+                    </form>
                 </div>
                 <div className="info">
                     <p id="email">Email: {user && user.email}</p>
