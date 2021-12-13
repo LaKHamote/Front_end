@@ -9,13 +9,14 @@ import { useUserContext } from "../../context/useUserContent";
 
 const UserProfile = () => {
     
-    const {user} = useUserContext()
+    const {user, changeUserImage } = useUserContext()
 
     const [Favourites, setFavourites] = useState([])
 
     const [ image, setImage ] = useState([])
 
     const [changePhoto, setchangePhoto] = useState(false)
+
 
     const fetchFavourites = async () => {
         const response = await api_v1.get("favourites")
@@ -56,19 +57,23 @@ const UserProfile = () => {
                 console.log("Error")
         }
     }
+    console.log(user)
 
     const addImage = async (e) => {
         e.preventDefault()
-        try{
-            const formData = new FormData()
-            formData.append('image[]', image[0])
-
-            const response = await controller.post(`user/add_image/${user.id}`, formData)
-            if(response.data){
-                setImage(response.data)
+        if(image.length > 0){
+            try{
+                const formData = new FormData()
+                formData.append('image[]', image[0])
+    
+                const response = await controller.post(`user/add_image/${user.id}`, formData)
+                if(response.data){
+                    setImage(response.data)
+                    changeUserImage()
+                }
+            }catch(error){
+                alert(error)   
             }
-        }catch(error){
-            alert(error)   
         }
     }
 
@@ -80,11 +85,15 @@ const UserProfile = () => {
             <Title>Bem Vindo</Title>
             <Container changePhoto={changePhoto}>
                 <div className="photo">
-                    <form onSubmit={(e) =>{ e.preventDefault() 
-                                            setchangePhoto(true)}}>
-                        <img src={user.profile_picture_url?  controller.defaults.baseURL+user.profile_picture_url : UserDefault} alt="Imagem do usuário"/>
-                        <button type="submit" >Gostaria de trocar sua foto?</button>
-                        
+                    <img src={user.profile_picture_url?  controller.defaults.baseURL + user.profile_picture_url : UserDefault} alt="Imagem do usuário"/>
+                    <button className="mudarFoto" 
+                            onClick={(e) =>{setchangePhoto(true)}} >
+                            Gostaria de trocar sua foto?
+                    </button>
+                    <form onSubmit={addImage} className="confirmarFoto">
+                        <input onChange={(e) => setImage(e.target.files)} type="file"/>
+                        <button type='submit'>Confirmar Imagem</button>
+                        <button type='submit'>Manter foto</button>
                     </form>
                 </div>
                 <div className="info">

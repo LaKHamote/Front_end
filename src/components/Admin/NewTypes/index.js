@@ -49,7 +49,7 @@ const NewType = () => {
 
     return (
         <Container onSubmit={createType}>
-            <input onChange={(e) => setnewType({name: e.target.value})} placeholder="Nome" type="text"/>
+            <input onChange={(e) => setnewType({name: e.target.value})} placeholder="Nome pluralizado" type="text"/>
             <button type="submit">Criar</button>
         </Container>
     );

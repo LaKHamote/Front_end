@@ -48,8 +48,24 @@ export const Container = styled.div`
         }
     }
 
+    .confirmarFoto{
+        display: none;
+    }
+
     ${props => props.changePhoto && css` 
-        background: blue;
+        .confirmarFoto{
+            display: inline;
+        }
+        div{
+            button.mudarFoto{
+                display: none;
+            }
+            form{
+                display: flex;
+                flex-direction:row;
+            }
+
+        }
     `}
 
 `;

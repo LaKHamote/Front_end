@@ -62,8 +62,13 @@ const UserProvider = ({children}) => {
         })
     }
 
+    const changeUserImage = async () => {
+        const response = await controller.get("user/show")
+        setUser({...user, profile_picture_url: response.data.profile_picture_url})
+    }
+
     return (
-        <UserContext.Provider value={{login, user, logout}}>
+        <UserContext.Provider value={{ login, user, logout, changeUserImage }}>
             {children}
         </UserContext.Provider>
     );

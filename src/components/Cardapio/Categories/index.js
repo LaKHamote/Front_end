@@ -16,22 +16,12 @@ const Categories = () => {
         })
       }, [])
 
-    const returnProperName = (name) => {
-        switch(name) {
-            case "macarrao":
-                return "Macarrões"
-            default:
-                return name.slice(0,1).toUpperCase() + name.slice(1) + "sss"
-                
-        }
-    }
-
     return (
         <BarraLateral isAdmin={isAdmin}>
             <div>
                 <Link to="/cardapio/todos">Todos</Link>
                 { categories.map((category, index) => (
-                    <Link key={index} to={`/cardapio/${category.name}`}>{returnProperName(category.name)}</Link>
+                    <Link key={index} to={`/cardapio/${category.name}`}>{category.name}</Link>
                 ))}
                 <Link className="edicao" to="/NewType">Criar nova Categoria</Link>
                 <Link className="edicao" to="/edit/products">Editar</Link>
